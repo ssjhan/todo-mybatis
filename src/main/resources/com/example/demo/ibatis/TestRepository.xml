@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper태그에 namespace속성으로 사용할 인터페이스의 풀네임을 적는다 -->
+<mapper namespace="com.example.demo.ibatis.TestRepository">
+
+    <!--  인터페이스의 추상메서드들을 crud에 맞는 명령어 태그로 매핑  -->
+    <!--   id속성에는 추상메서드 이름을 적는다 -->
+    <insert id="save">
+        INSERT INTO TBL_TEST
+            (id, username, age)
+        VALUES
+            (#{id}, #{username}, #{age})
+    </insert>
+
+    <update id="modify">
+        UPDATE TBL_TEST
+        SET username=#{username}, age=#{age}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="remove">
+        DELETE FROM TBL_TEST
+        WHERE id=#{id}
+    </delete>
+
+    <select id="findAll" resultType="com.example.demo.ibatis.TestEntity">
+        SELECT id, username, age
+        FROM TBL_TEST
+    </select>
+
+</mapper>

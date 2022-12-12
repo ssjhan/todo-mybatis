@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.user.repository.UserRepository">
+
+    <select id="findUserByEmail" resultType="com.example.demo.user.entity.UserEntity">
+        SELECT id, email, username, password
+        FROM tbl_user
+        WHERE email=#{email}
+    </select>
+
+    <select id="existsByEmail" resultType="boolean">
+        SELECT COUNT(*)
+        FROM tbl_user
+        WHERE email=#{email}
+    </select>
+
+
+
+    <insert id="register">
+        INSERT INTO tbl_user
+        (id, email, password, username)
+        VALUES
+        (#{id}, #{email}, #{password}, #{username})
+    </insert>
+</mapper>
