@@ -7,6 +7,7 @@ import com.example.demo.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,16 +21,19 @@ public class TodoApiController {
 
     // 할 일 목록 전체조회 요청
     @GetMapping
-    public ResponseEntity<?> todos() {
+    public ResponseEntity<?> todos(@AuthenticationPrincipal String userId) {
         log.info("/api/todos GET request!");
-        return ResponseEntity.ok().body(service.findAllServ());
+        return ResponseEntity.ok().body(service.findAllServ(userId));
     }
 
     // 할 일 목록 등록 요청
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody ToDo newTodo) {
+    public ResponseEntity<?> create(
+            //시큐리티 인증 컨텍스트에서 받아오는 값
+            @AuthenticationPrincipal String userId
+            ,@RequestBody ToDo newTodo) {
 
-        newTodo.setUserId("noname");
+        newTodo.setUserId(userId);
         log.info("/api/todos POST request! - {}", newTodo);
 
         try {
@@ -66,12 +70,12 @@ public class TodoApiController {
     // URI : /api/todos/3 : DELETE
     // => 3번 할 일을 삭제 후 삭제된 이후 갱신된 할일 목록 리턴
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id) {
+    public ResponseEntity<?> delete(@PathVariable String id, @AuthenticationPrincipal String userId) {
 
         log.info("/api/todos/{} DELETE request!", id);
 
         try {
-            FindAllDTO dtos = service.deleteServ(id);
+            FindAllDTO dtos = service.deleteServ(id, userId);
             return ResponseEntity.ok().body(dtos);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
@@ -81,8 +85,9 @@ public class TodoApiController {
 
     //할일 수정 요청
     @PutMapping
-    public ResponseEntity<?>  update(@RequestBody ToDo toDo) {
+    public ResponseEntity<?>  update(@RequestBody ToDo toDo, @AuthenticationPrincipal String userId) {
 
+        toDo.setUserId(userId);
         log.info("/api/todos/{} DELETE request!", toDo);
 
         try {

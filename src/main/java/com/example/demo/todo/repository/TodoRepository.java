@@ -19,7 +19,7 @@ public interface TodoRepository {
     boolean save(ToDo todo);
 
     // 할일 목록조회 기능
-    List<ToDo> findAll();
+    List<ToDo> findAll(String userId);
 
     // 할일 개별조회 기능
     ToDo findOne(String id);

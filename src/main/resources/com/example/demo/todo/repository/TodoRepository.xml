@@ -20,6 +20,7 @@
     <select id="findAll" resultType="com.example.demo.todo.entity.ToDo">
         SELECT id, userId, title, done
         FROM tbl_todo
+        WHERE userId=#{userId}
         ORDER BY regDate
     </select>
 
