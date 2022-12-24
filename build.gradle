@@ -29,7 +29,7 @@ dependencies {
 
 	// 데이터베이스 관련 라이브러리
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' //mysql로 바꿀려면 mariadb가 아닌 mysql로 바꿔야 함.
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 
 	// JWT 관련 라이브러리
