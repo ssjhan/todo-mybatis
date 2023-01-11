@@ -12,28 +12,21 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UserEntity {
 
-    private String customerid;
+    private String id;
     private String username;
     private String email;
-    private String password1;
-    private String telnumber;
-
-    private String addr;
-    private String detailaddr;
-
+    private String password;
 
     public UserEntity(){
-        this.customerid = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString();
     }
 
     public UserEntity(UserRequestDTO dto){
         this();
         this.email = dto.getEmail();
         this.username = dto.getUsername();
-        this.password1 = dto.getPassword1();
-        this.telnumber = dto.getTelnumber();
-        this.addr = dto.getAddr();
-        this.detailaddr = dto.getDetailaddr();
+        this.password = dto.getPassword();
+
     }
 
 }

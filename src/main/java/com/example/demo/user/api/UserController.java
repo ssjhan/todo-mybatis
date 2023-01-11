@@ -47,7 +47,7 @@ public class UserController {
 
         try {
             UserEntity user
-                    = userService.validateLogin(dto.getEmail(), dto.getPassword1());
+                    = userService.validateLogin(dto.getEmail(), dto.getPassword());
 
             // 토큰 생성
             final String token = provider.create(user);
