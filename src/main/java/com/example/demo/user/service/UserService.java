@@ -21,9 +21,10 @@ public class UserService {
             throw new RuntimeException("Invalid args!");
         }
 
-        //패스워드 인코딩
+        // 패스워드 인코딩
         String rawPw = userEntity.getPassword();
         userEntity.setPassword(encoder.encode(rawPw));
+
         boolean flag = userRepository.register(userEntity);
 
         return flag
@@ -45,27 +46,23 @@ public class UserService {
 
         // 패스워드가 일치하는가?
         if (!encoder.matches(password, user.getPassword())) {
-            log.info(user.getPassword());
             throw new RuntimeException("비밀번호가 틀렸습니다.");
         }
 
         return user; // 로그인 성공시 회원정보 리턴
     }
 
-    //이메일 중복체크
-    public boolean isDuplicate(String email){
-
+    // 이메일 중복체크
+    public boolean isDuplicate(String email) {
         return userRepository.existsByEmail(email);
     }
 
 
-
-
+    // 프로필 찾기
+    public String getProfilePath(String userId) {
+        String profile = userRepository.findProfile(userId);
+        log.info("find profile path - {}", profile);
+        return profile;
+    }
 }
-
-
-
-
-
-
 

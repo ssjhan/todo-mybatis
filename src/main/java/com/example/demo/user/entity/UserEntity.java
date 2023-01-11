@@ -8,7 +8,7 @@ import lombok.ToString;
 
 import java.util.UUID;
 
-@Getter @Setter@ToString
+@Setter @Getter @ToString
 @AllArgsConstructor
 public class UserEntity {
 
@@ -17,16 +17,17 @@ public class UserEntity {
     private String email;
     private String password;
 
-    public UserEntity(){
+    private String profileImg;
+
+    public UserEntity() {
         this.id = UUID.randomUUID().toString();
     }
 
-    public UserEntity(UserRequestDTO dto){
+    // dto를 entity로 변환
+    public UserEntity(UserRequestDTO dto) {
         this();
         this.email = dto.getEmail();
         this.username = dto.getUsername();
         this.password = dto.getPassword();
-
     }
-
 }

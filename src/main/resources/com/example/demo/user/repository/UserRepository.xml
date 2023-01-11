@@ -6,7 +6,7 @@
 <mapper namespace="com.example.demo.user.repository.UserRepository">
 
     <select id="findUserByEmail" resultType="com.example.demo.user.entity.UserEntity">
-        SELECT id, username, email, password
+        SELECT id, email, username, password
         FROM tbl_user
         WHERE email=#{email}
     </select>
@@ -17,14 +17,16 @@
         WHERE email=#{email}
     </select>
 
-
-
     <insert id="register">
         INSERT INTO tbl_user
-        (id, username, email, password)
+        (id, email, password, username, profileImg)
         VALUES
-        (#{id}, #{username}, #{email}, #{password})
+        (#{id}, #{email}, #{password}, #{username}, #{profileImg})
     </insert>
 
-
+    <select id="findProfile" resultType="String">
+        SELECT profileImg
+        FROM tbl_user
+        WHERE id = #{userId}
+    </select>
 </mapper>
