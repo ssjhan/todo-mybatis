@@ -6,24 +6,24 @@
 <mapper namespace="com.example.demo.user.repository.UserRepository">
 
     <select id="findUserByEmail" resultType="com.example.demo.user.entity.UserEntity">
-        SELECT customerid, username, telnumber, email, password1, addr, detailaddr
-        FROM TBL_CUSTOMER
+        SELECT id, username, email, password
+        FROM tbl_user
         WHERE email=#{email}
     </select>
 
     <select id="existsByEmail" resultType="boolean">
         SELECT COUNT(*)
-        FROM TBL_CUSTOMER
+        FROM tbl_user
         WHERE email=#{email}
     </select>
 
 
 
     <insert id="register">
-        INSERT INTO TBL_CUSTOMER
-        (customerid, username, telnumber, email, password1, addr, detailaddr)
+        INSERT INTO tbl_user
+        (id, username, email, password)
         VALUES
-        (#{customerid}, #{username}, #{telnumber}, #{email}, #{password1}, #{addr}, #{detailaddr})
+        (#{id}, #{username}, #{email}, #{password})
     </insert>
 
 
