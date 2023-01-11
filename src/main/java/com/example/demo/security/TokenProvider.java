@@ -40,7 +40,7 @@ public class TokenProvider {
                 //header에 들어갈 내용 및 서명을 위한 SECRET_KEY
                 .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()), SignatureAlgorithm.HS512)
                 //payload에 들어갈 내용
-                .setSubject(userEntity.getId()) //sub
+                .setSubject(userEntity.getCustomerid()) //sub
                 .setIssuer("demo app") //iss
                 .setIssuedAt(new Date()) // iat
                 .setExpiration(expriyDate) // exp

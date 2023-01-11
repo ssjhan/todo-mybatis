@@ -22,8 +22,8 @@ public class UserService {
         }
 
         //패스워드 인코딩
-        String rawPw = userEntity.getPassword();
-        userEntity.setPassword(encoder.encode(rawPw));
+        String rawPw = userEntity.getPassword1();
+        userEntity.setPassword1(encoder.encode(rawPw));
         boolean flag = userRepository.register(userEntity);
 
         return flag
@@ -44,7 +44,8 @@ public class UserService {
         if (user == null) throw new RuntimeException("가입된 회원이 아닙니다.");
 
         // 패스워드가 일치하는가?
-        if (!encoder.matches(password, user.getPassword())) {
+        if (!encoder.matches(password, user.getPassword1())) {
+            log.info(user.getPassword1());
             throw new RuntimeException("비밀번호가 틀렸습니다.");
         }
 
@@ -53,6 +54,7 @@ public class UserService {
 
     //이메일 중복체크
     public boolean isDuplicate(String email){
+
         return userRepository.existsByEmail(email);
     }
 

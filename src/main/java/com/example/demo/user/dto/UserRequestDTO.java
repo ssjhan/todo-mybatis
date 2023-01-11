@@ -8,9 +8,11 @@ import lombok.*;
 public class UserRequestDTO {
 
     private String email;
-    private String password;
+    private String password1;
     private String username;
-    private String address;
+    private String telnumber;
+    private String addr;
+    private String detailaddr;
 
 
 }
