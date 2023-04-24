@@ -24,8 +24,7 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-application.properties
-TokenProvider.java
+src/main/java/com/example/demo/security/TokenProvider.java
 
 
 ### NetBeans ###
